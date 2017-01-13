@@ -1,0 +1,335 @@
+/**********************************************************************
+ This file contains CSS that is primarily meant for the main game
+ screen. It may be used by other elements as well.
+ **********************************************************************/
+
+/************************************************************
+ * Opponent area classes
+ ************************************************************/
+
+.opp-area {
+    position: absolute;
+    width: 22%;
+    height: 10.5%;
+    bottom: 19%;
+    margin: 0% 1.5%;
+    background-color: rgba(40, 40, 40, 0.75);
+}
+
+.opp-area .game-label {
+    position: absolute;
+    width: 98%;
+    height: 30%;
+    top: 2%;
+    left: 1%;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 1.0);
+}
+
+.opp-area .winner-button {
+    display: none;
+    position: absolute;
+    width: 11%;
+    height: 30%;
+    top: 2%;
+    left: 1%;
+    padding: 0%;
+}
+.opp-area .loser-button {
+    display: none;
+    position: absolute;
+    width: 11%;
+    height: 30%;
+    top: 2%;
+    right: 1%;
+    padding: 0%;
+}
+
+.opp-card-row {
+    position: absolute;
+    width: 98%;
+    height: 63%;
+    left: 1%;
+    bottom: 2.5%;
+}
+
+.opp-card-row .card {
+    float: left;
+    height: 100%;
+    width: 19.15%;
+    margin: 0% 0.5%;
+    background-color: #F0F0F0;
+}
+
+.opp-card-row :first-child {
+    margin-left: 0%;
+}
+
+.opp-card-row :last-child {
+    margin-right: 0%;
+}
+
+/************************************************************
+ * Opponent area style classes
+ ************************************************************/
+
+.opp-area.card-area-debug .game-label {
+    width: 75%;
+    height: 30%;
+    top: 2%;
+    left: 12.5%;
+}
+
+/************************************************************
+ * Player area classes
+ ************************************************************/
+
+.player-area {
+    position: absolute;
+    width: 41%;
+    height: 13.5%;
+    right: 0%;
+    bottom: 4.5%;
+    padding: 0.3%;
+    background-color: rgba(40, 40, 40, 0.75);
+}
+
+.player-ext-area {
+    position: absolute;
+    width: 75%;
+    height: 28%;
+    left: 12.5%;
+    bottom: -28%;
+    background-color: rgba(40, 40, 40, 0.75);
+    border-top: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.player-area .game-label {
+    position: absolute;
+    width: 98%;
+    height: 90%;
+    bottom: 2%;
+    left: 1%;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 1.0);
+}
+
+.player-area .winner-button {
+    display: none;
+    position: absolute;
+    width: 11%;
+    height: 90%;
+    top: 2%;
+    left: 1%;
+    padding: 0%;
+}
+
+.player-area .loser-button {
+    display: none;
+    position: absolute;
+    width: 11%;
+    height: 90%;
+    top: 2%;
+    right: 1%;
+    padding: 0%;
+}
+
+.player-card-row {
+    position: absolute;
+    width: 98%;
+    height: 95%;
+    left: 1%;
+    bottom: 2.5%;
+}
+
+.player-card-row .card {
+    float: left;
+    height: 100%;
+    width: 19.15%;
+    margin: 0 0.5%;
+    background-color: #F0F0F0;
+}
+
+.player-card-row :first-child {
+    margin-left: 0%;
+}
+
+.player-card-row :last-child {
+    margin-right: 0%;
+}
+
+/************************************************************
+ * Player area style classes
+ ************************************************************/
+
+.player-area.card-area-debug .game-label {
+    width: 75%;
+    height: 90%;
+    top: 2%;
+    left: 12.5%;
+}
+
+/************************************************************
+ * General style classes
+ ************************************************************/
+
+.card.dull {
+    opacity: 0.4;
+}
+
+/************************************************************
+ * Debug button style classes
+ ************************************************************/
+
+.card-area-debug .winner-button {
+    display: inherit;
+}
+
+.card-area-debug .winner-button.active {
+    background: linear-gradient(#43CA43, #26AF26);
+    background-color: #33AA33;
+}
+
+.card-area-debug .loser-button {
+    display: inherit;
+}
+
+.card-area-debug .loser-button.active {
+    background: linear-gradient(#DD4343, #AF3636);
+	background-color: #BB3333;
+}
+
+/************************************************************
+ * Outcome style classes
+ ************************************************************/
+
+.game-label.winner {
+    background: linear-gradient(#43CA43, #26AF26);
+    background-color: #33AA33;
+}
+
+.game-label.loser {
+    background: linear-gradient(#DD4343, #AF3636);
+	background-color: #BB3333;
+}
+
+.game-label.bystander {
+    background-color: rgba(240, 240, 240, 0.75);
+}
+
+/************************************************************
+ * Deal area classes
+ ************************************************************/
+
+.deck-area {
+    position: absolute;
+    width: 8%;
+    height: 13.5%;
+    right: 46%;
+    bottom: 4.5%;
+    padding: 0.3%;
+    background-color: rgba(40, 40, 40, 0.75);
+}
+
+.deck-card {
+    float: left;
+    height: 100%;
+    width: 100%;
+    margin: 0 0.5%;
+    background-color: #F0F0F0;
+}
+
+.deal-card {
+    position: absolute;
+    height: 94%;
+    width: 94%;
+    top: 3%;
+    left: 3%;
+    background-color: #F0F0F0;
+    pointer-events: none;
+}
+
+#game-advance-button {
+    position: absolute;
+    width: 150%;
+    height: 50%;
+    left: -25%;
+    bottom: 25%;
+    font-size: 140%;
+}
+
+#game-advance-button:disabled {
+    background: linear-gradient(#888888, #666666);
+	background-color: #888888;
+}
+
+#game-hide-button {
+    position: absolute;
+    left: 48%;
+    bottom: 1%;
+}
+
+/************************************************************
+ * Dock area classes
+ ************************************************************/
+
+.dock-area {
+    position: absolute;
+    width: 41%;
+    height: 13.5%;
+    left: 0%;
+    bottom: 4.5%;
+    padding: 0.3%;
+    background-color: rgba(40, 40, 40, 0.75);
+}
+
+#game-options-button {
+    position: absolute;
+    width: 11.5%;
+    height: 45%;
+    top: 3%;
+    font-size: 130%;
+}
+
+#game-home-button {
+    position: absolute;
+    width: 11.5%;
+    height: 45%;
+    bottom: 3%;
+    font-size: 130%;
+}
+
+#game-action-button {
+    position: absolute;
+    width: 11.5%;
+    height: 45%;
+    top: 3%;
+    right: 1%;
+    font-size: 130%;
+}
+
+#game-auto-button {
+    position: absolute;
+    width: 11.5%;
+    height: 45%;
+    bottom: 4%;
+    right: 1%;
+    font-size: 130%;
+}
+
+.game-clothing-area {
+    position: absolute;
+    width: 73%;
+    height: 94%;
+    left: 13%;
+}
+
+.game-clothing-image {
+    float: right;
+    height: 48.5%;
+    width: 15.5%;
+    margin: 0% 0.5% 0.75% 0.5%;
+    background-color: #F0F0F0;
+}

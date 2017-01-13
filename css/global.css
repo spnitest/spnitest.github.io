@@ -1,0 +1,283 @@
+/**********************************************************************
+ This file contains CSS that is globally consitent across screens and 
+ game elements. 
+ **********************************************************************/
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 14px;
+    color: #050505;
+    background-color: #050505;
+    background-image: url("../img/background1.png");
+    background-size: 1000px 100%;
+    background-position: center;
+    background-repeat: repeat-x;
+}
+
+/************************************************************
+ * Bootstrap overrides
+ ************************************************************/
+ 
+* {
+    box-sizing: border-box;
+}
+
+table {
+	border-collapse: initial;
+}
+ 
+body.modal-open {
+	margin-left: 0px;
+}
+
+.pagination {
+	margin: 5px 0px;
+}
+
+.glyphicon {
+    top: 0px;
+}
+
+/************************************************************
+ * Consitent style classes
+ ************************************************************/
+
+.trimmed {
+    border: 2px solid #111111;
+	border-radius: 5px;
+}
+
+/************************************************************
+ * Screen classes
+ ************************************************************/
+ 
+.screen-container {
+	position: absolute;
+	width: 100vw;
+	height: 75vw;
+	max-width: 133.33vh;
+	max-height: 100vh;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: auto;
+    overflow: hidden;
+}
+
+.screen {
+	position: absolute;
+    top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: 0.5%;
+    overflow: hidden;
+}
+
+/************************************************************
+ * Colours
+ ************************************************************/
+
+.clear {
+    opacity: 0;
+}
+
+.light-gray {
+    background: linear-gradient(#CCCCCC, #AAAAAA);
+    background-color: #CCCCCC;
+}
+
+.gray {
+    background: linear-gradient(#888888, #666666);
+	background-color: #888888;
+}
+
+.dark-gray {
+    background: linear-gradient(#333333, #222222);
+    background-color: #333333;
+}
+
+.red {
+    background: linear-gradient(#BB3333, #9F1616);
+	background-color: #BB3333;
+}
+
+.blue {
+    background: linear-gradient(#0088CC, #0066AA);
+	background-color: #0088CC;
+}
+
+.green {
+    background: linear-gradient(#33AA33, #168F16);
+    background-color: #33AA33;
+}
+
+/************************************************************
+ * Positional classes
+ ************************************************************/
+
+.quaterpast-left {
+    left: -12.5%;
+}
+
+.left {
+    left: 0%;
+}
+
+.quater-left {
+    left: 12.5%;
+}
+
+.half-left {
+    left: 25%;
+}
+
+.half-right {
+    right: 25%;
+}
+
+.quater-right {
+    right: 12.5%;
+}
+
+.right {
+    right: 0%;
+}
+
+.quaterpast-right {
+    right: -12.5%;
+}
+
+/************************************************************
+ * Dialogue Bubble Classes
+ ************************************************************/
+
+.bubble-row {
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    top: 0;
+}
+
+.bubble-cell {
+    position: absolute;
+    display: table;
+    width: 24.5%;
+    top: 10%;
+    height: 90%;
+    margin: 0 0.25%;
+    padding: 1%;
+    text-align: center;
+    font-size: 120%;
+    background: #F0F0F0;
+}
+
+.bubble {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    margin: 1%;
+    vertical-align: middle;
+}
+
+.bubble :before, .bubble :after {
+	width: 0;
+	height: 0;
+	
+	content: "";
+	position: absolute;
+	
+	border-style: solid;
+	border-color: transparent;
+	border-bottom: 0;
+}
+
+.bubble :before {
+	border-top-color: black;
+	border-width: 16px;
+    
+    bottom: -15px;
+	left: 50%;
+	margin-left: -15px;
+}
+
+.bubble :after {
+	border-top-color: #F0F0F0;
+	border-width: 15px;
+    
+    bottom: -13px;
+	left: 50%;
+	margin-left: -14px;
+}
+
+/************************************************************
+ * Character image classes
+ ************************************************************/
+
+.character-image-row {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    bottom: 0;
+}
+
+.character-image-cell {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+.character-image {
+	position: absolute;
+	width: auto;
+	height: 100%;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+/************************************************************
+ * General button classes
+ ************************************************************/
+
+
+/************************************************************
+ * Specific button classes
+ ************************************************************/
+
+.hide-button {
+    width: 4%;
+    height: 4%;
+    background-color: rgba(245, 245, 245, 0.3); 
+}
+
+.hide-button .option-1 {
+    display: inherit;
+}
+
+.hide-button .option-2 {
+    display: none;
+}
+
+.hide-button-selected {
+    width: 4%;
+    height: 4%;
+    background-color: rgba(245, 245, 245, 1.0); 
+}
+
+.hide-button-selected .option-1 {
+    display: none;
+}
+
+.hide-button-selected .option-2 {
+    display: inherit;
+}

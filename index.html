@@ -1,11 +1,271 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Strip Poker Night at the Inventory</title>
+    
+    <!-- Third Party Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    
+    <!-- Project Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
-<body>
+<body onload="initCore()">
 
-    This is just the beginning, it will not be the end.
+    <!-- Primary Screen Container -->
+    <div class="screen-container">
+        
+        
+        <!-- Title Screen -->
+        <div id="title-screen" class="screen" hidden>
+        
+        </div>
+        
+        
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            
+            <!-- Dialogue Bubbles -->
+            <div id='game-bubble-row' class='bubble-row'>
+                <div id='game-bubble-1' class='trimmed left bubble-cell'>
+                    <div class='bubble'><span id='game-dialogue-1'>Placeholder 1</span></div>
+                </div>
+                <div id='game-bubble-2' class='trimmed half-left bubble-cell'>
+                    <div class='bubble'><span id='game-dialogue-2'>Placeholder 2</span></div>
+                </div>
+                <div id='game-bubble-3' class='trimmed half-right bubble-cell'>
+                    <div class='bubble'><span id='game-dialogue-3'>Placeholder 3</span></div>
+                </div>
+                <div id='game-bubble-4' class='trimmed right bubble-cell'>
+                    <div class='bubble'><span id='game-dialogue-4'>Placeholder 4</span></div>
+                </div>
+            </div>
+            
+            <!-- Opponent Images -->
+            <div class="character-image-row">
+                <div class="quaterpast-left character-image-cell">
+                    <img id="game-image-1" class="character-image" src="img/shadow.png">
+                </div>
+                <div class="quater-left character-image-cell">
+                    <img id="game-image-2" class="character-image" src="img/shadow.png">
+                </div>
+                <div class="quater-right character-image-cell">
+                    <img id="game-image-3" class="character-image" src="img/shadow.png">
+                </div>
+                <div class="quaterpast-right character-image-cell">
+                    <img id="game-image-4" class="character-image" src="img/shadow.png">
+                </div>
+            </div>
+            
+            <!-- Game Table -->
+            <div id="gameTable">
+                
+                <!-- Opponent Card Areas -->
+                <div id="opp-area-1" class="trimmed left opp-area card-area-debug opp-area-style-1">
+                    <div id="game-opp-label-1" class="trimmed game-label">Opponent 1</div>
+                    <div class="opp-card-row">
+                        <img id="opp1c1" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp1c2" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp1c3" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp1c4" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp1c5" class="trimmed card clear" src="img/cards/unknown.png">
+                    </div>
+                    <button id="winner-1" class="trimmed winner-button" onclick="setDebugWinner(1)">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    </button>
+                    <button id="loser-1" class="trimmed loser-button" onclick="setDebugLoser(1)">
+                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div id="opp-area-2" class="trimmed half-left opp-area card-area-debug opp-area-style-1">
+                    <div id="game-opp-label-2" class="trimmed game-label">Opponent 2</div>
+                    <div class="opp-card-row">
+                        <img id="opp2c1" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp2c2" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp2c3" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp2c4" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp2c5" class="trimmed card clear" src="img/cards/unknown.png">
+                    </div>
+                    <button id="winner-2" class="trimmed winner-button" onclick="setDebugWinner(2)">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    </button>
+                    <button id="loser-2" class="trimmed loser-button" onclick="setDebugLoser(2)">
+                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div id="opp-area-3" class="trimmed half-right opp-area card-area-debug opp-area-style-1">
+                    <div id="game-opp-label-3" class="trimmed game-label">Opponent 3</div>
+                    <div class="opp-card-row">
+                        <img id="opp3c1" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp3c2" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp3c3" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp3c4" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp3c5" class="trimmed card clear" src="img/cards/unknown.png">
+                    </div>
+                    <button id="winner-3" class="trimmed winner-button" onclick="setDebugWinner(3)">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    </button>
+                    <button id="loser-3" class="trimmed loser-button" onclick="setDebugLoser(3)">
+                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div id="opp-area-4" class="trimmed right opp-area card-area-debug opp-area-style-1">
+                    <div id="game-opp-label-4" class="trimmed game-label">Opponent 4</div>
+                    <div class="opp-card-row">
+                        <img id="opp4c1" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp4c2" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp4c3" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp4c4" class="trimmed card clear" src="img/cards/unknown.png">
+                        <img id="opp4c5" class="trimmed card clear" src="img/cards/unknown.png">
+                    </div>
+                    <button id="winner-4" class="trimmed winner-button" onclick="setDebugWinner(4)">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    </button>
+                    <button id="loser-4" class="trimmed loser-button" onclick="setDebugLoser(4)">
+                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+                
+                <!-- Player Card Area -->
+                <div id="player-area" class="trimmed player-area card-area-debug opp-area-style-1">
+                    <div class="player-card-row">
+                        <input type="image" id="hc1" class="trimmed card clear" src="img/cards/unknown.png" onclick="selectCard(0)">
+                        <input type="image" id="hc2" class="trimmed card clear" src="img/cards/unknown.png" onclick="selectCard(1)">
+                        <input type="image" id="hc3" class="trimmed card clear" src="img/cards/unknown.png" onclick="selectCard(2)">
+                        <input type="image" id="hc4" class="trimmed card clear" src="img/cards/unknown.png" onclick="selectCard(3)">
+                        <input type="image" id="hc5" class="trimmed card clear" src="img/cards/unknown.png" onclick="selectCard(4)">
+                    </div>
+                    <div class="trimmed player-ext-area opp-area-style-1">
+                        <div id="game-player-label" class="trimmed game-label">Human Player</div>
+                        <button id="winner-0" class="trimmed winner-button" onclick="setDebugWinner(0)">
+                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                        </button>
+                        <button id="loser-0" class="trimmed loser-button" onclick="setDebugLoser(0)">
+                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hide Button -->
+                <button id="game-hide-button" class="trimmed hide-button" onclick="toggleGameTable()">
+                    <span class="option-1 glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    <span class="option-2 glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </button>
+                
+                <!-- Dock Area -->
+                <div id="dock-area" class="trimmed dock-area dock-area-style-1">
+                    
+                    <!-- Options Button -->
+                    <button id='game-options-button' class='trimmed red' onclick=''>
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </button>
+                    
+                    <!-- Home Button -->
+                    <button id='game-home-button' class='trimmed red' style="padding-right:2%;" onclick=''>
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    </button>
+                    
+                    <!-- Clothing List -->
+                    <div class="game-clothing-area">
+                        <img id="game-clothing-1" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-2" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-3" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-4" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-5" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-6" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-7" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-8" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-9" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-10" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-11" class="trimmed game-clothing-image"/>
+                        <img id="game-clothing-12" class="trimmed game-clothing-image"/>
+                    </div>
+                    
+                    <!-- Action Button -->
+                    <button id='game-action-button' class='trimmed red' style="padding-right:1%;" onclick="">
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                    </button>
+                    
+                    <!-- Auto Button -->
+                    <button id='game-auto-button' class='trimmed red' onclick="toggleAutoMode()">
+                        <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+                    </button>
+                    
+                </div>
+                
+                <!-- Deck Area -->
+                <div id="deck-area" class="trimmed deck-area deck-area-style-1">
+                    
+                    <!-- Static Deck Image -->
+                    <img id="deck-card" class="trimmed deck-card" src="img/cards/unknown.png">
+                    
+                    <!-- Deal Cards -->
+                    <img id="d0c1" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d0c2" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d0c3" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d0c4" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d0c5" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    
+                    <img id="d1c1" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d1c2" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d1c3" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d1c4" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d1c5" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    
+                    <img id="d2c1" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d2c2" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d2c3" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d2c4" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d2c5" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    
+                    <img id="d3c1" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d3c2" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d3c3" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d3c4" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d3c5" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    
+                    <img id="d4c1" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d4c2" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d4c3" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d4c4" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    <img id="d4c5" class="trimmed deal-card clear" src="img/cards/unknown.png">
+                    
+                    <!-- Advance Button -->
+                    <button id='game-advance-button' class='trimmed red' onclick='advanceGame()'>Advance</button>
+                    
+                </div>
+                
+            </div> <!-- Game Table End -->
+            
+        </div> <!-- Game Screen End -->
+        
+    
+    </div> <!-- Screen Container End -->
 
+
+
+    <!-- Third Party JavaScript -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+    <!-- Project Objects -->
+    <script src="js/card.js"></script>
+    <script src="js/deck.js"></script>
+    <script src="js/hand.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/ticket.js"></script>
+    <script src="js/log.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/behaviour.js"></script>
+    <script src="js/parser.js"></script>
+    
+    <!-- Project JavaScript -->
+    <script src="js/core.js"></script>
+    <script src="js/game.js"></script>
+    
 </body>
 </html>
