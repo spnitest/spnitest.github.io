@@ -53,8 +53,8 @@ var DULL_CARD = "dull";
 
 // deal related psuedo constants
 var DEAL_LOCATION = ["3%", "3%"];
-var DEAL_ANIM_TIME = 500;
-var DEAL_ANIM_SPACING = 100;
+var DEAL_ANIM_TIME = 0;
+var DEAL_ANIM_SPACING = 0;
 
 
 /**********************************************************************
@@ -364,6 +364,16 @@ Table.prototype.unmark = function (player)
 {
     for (var outcome in eOutcome) {
         $labels[player.slot].removeClass(eOutcome[outcome]);
+    }
+};
+
+/**********************************************************************
+ * Sets all marks for all players.
+ **/
+Table.prototype.setMarks = function () 
+{
+    for (var i = 0; i < this.players.length; i++) {
+        this.mark(this.players[i], this.players[i].outcome);
     }
 };
 

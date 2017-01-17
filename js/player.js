@@ -37,10 +37,14 @@ var eSize = {
 function Player()
 {
     // basics
+    this.ID = "";           // directory name
     this.inGame = true;
     this.slot = 0;
+    this.xml = null;
     
-    this.count = 2; //TODO: TEMPORARY, REPLACE WITH WARDROBE
+    
+    //TODO: TEMPORARY, REPLACE WITH WARDROBE
+    this.count = 2; 
     
     
     // behaviour stuff
@@ -49,6 +53,7 @@ function Player()
     
     // poker stuff
     this.hand = new Hand();
+    this.outcome = eOutcome.BYSTANDER;
 }
 
 

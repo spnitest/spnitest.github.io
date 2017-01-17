@@ -38,6 +38,7 @@ var AUTO_HIDE = true;
 // ai pseudo constants
 var AI_SWAP_DELAY = 100;
 var AI_END_TURN_DELAY = 50;
+var AI_STRIP_DELAY = 1000;
 
 
 /**********************************************************************
@@ -135,6 +136,10 @@ function finishDealPhase()
         table.dullCards(eGroup.HUMAN);
     }
     
+    // update behaviour
+    setGlobalSituation(eSituation.REVIEW_HAND);
+    updateAllBehaviours();
+    
     // force advancement
     allowAdvancement(true);
     advanceGame();
@@ -172,6 +177,15 @@ function takeTurn(turn)
         // determine which cards to swap
         table.players[turn].decideCardSwap();
         table.dullCardsSingle(table.players[turn]);
+        
+        // update behaviour
+        setSingleSituation(eSituation.SWAP_CARDS, table.players[turn]);
+        updateBehaviour(table.players[turn]);
+    }
+    else {
+        // update behaviour
+        setSingleSituation(eSituation.IDLE_CHATTER, table.players[turn]);
+        updateBehaviour(table.players[turn]);
     }
     
     // advance turn
@@ -191,6 +205,15 @@ function advanceTurn(turn)
         // swap cards
         table.players[turn].hand.swap(table.deck);
         table.fillCardsSingle(table.players[turn]);
+        
+        // update behaviour
+        setSingleSituation(eSituation.REVIEW_HAND, table.players[turn]);
+        updateBehaviour(table.players[turn]);
+    }
+    else {
+        // update behaviour
+        setSingleSituation(eSituation.IDLE_CHATTER, table.players[turn]);
+        updateBehaviour(table.players[turn]);
     }
     
     // determine if there are more AI to handle
@@ -232,6 +255,10 @@ function executeSwapPhase()
         table.fillCards(eGroup.HUMAN);
         table.showCards(eGroup.HUMAN);
     }
+    
+    // update behaviour
+    setGlobalSituation(eSituation.PRE_REVEAL);
+    updateAllBehaviours();
     
     // allow advancement
     allowAdvancement(true);
@@ -281,13 +308,24 @@ function executeRevealPhase()
     switch (table.rule) 
     {
         case eStripRule.LOSER: {
+            // mark the winners and losers
+            rankedPlayers[rankedPlayers.length - 1].outcome = eOutcome.LOSER;
             for (var i = 0; i < rankedPlayers.length - 1; i++) {
-                table.mark(rankedPlayers[i], eOutcome.BYSTANDER);
+                rankedPlayers[i].outcome = eOutcome.BYSTANDER;
             }
-            table.mark(rankedPlayers[rankedPlayers.length - 1], eOutcome.LOSER);
+            table.setMarks();
+            
+            // update behaviour
+            setTargetedSituation(eSituation.SELF_LOST, 
+                                 rankedPlayers[rankedPlayers.length - 1], 
+                                 eSituation.OTHER_LOST);
+            updateAllBehaviours();
+            
             break;
         }
     
+            
+        // TODO: Adjust all cases below
         case eStripRule.WINNER: {
             table.mark(rankedPlayers[0], eOutcome.WINNER);
             break;
@@ -343,6 +381,12 @@ function finishRetrievePhase()
         table.showTable(false);
     }
     
+    // update behaviour
+    setTargetedSituation(eSituation.SELF_PRE_STRIP, 
+                         rankedPlayers[rankedPlayers.length - 1], 
+                         eSituation.OTHER_PRE_STRIP);
+    updateAllBehaviours();
+    
     // allow advancement
     allowAdvancement(true);
 }
@@ -370,6 +414,32 @@ function executeStripPhase()
         // TODO: ALSO RESET THE DEBUG BUTTONS
     }
     
+    
+    // update behaviour
+    setTargetedSituation(eSituation.SELF_STRIP, 
+                         rankedPlayers[rankedPlayers.length - 1], 
+                         eSituation.OTHER_STRIP);
+    updateAllBehaviours();
+    
+    // give the character time to strip
+    window.setTimeout(function() {
+        finishStripPhase();
+    }, AI_STRIP_DELAY);
+    
+    
+}
+
+/**********************************************************************
+ * Finishes the strip phase of the game.
+ **/
+function finishStripPhase() {
+    console.log("[finishStripPhase] Strip phase is finishing...");
+    
+    // update behaviour
+    setTargetedSituation(eSituation.SELF_POST_STRIP, 
+                         rankedPlayers[rankedPlayers.length - 1], 
+                         eSituation.OTHER_POST_STRIP);
+    updateAllBehaviours();
     
     // allow advancement
     allowAdvancement(true);

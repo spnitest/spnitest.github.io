@@ -12,20 +12,38 @@
  **********************************************************************/
 
 /************************************************************
- * An enumeration for every major dialogue event in the game.
+ * An enumeration for every base dialogue event in the game.
  **/
-var eEvent = {
+// TODO: Consider expanding to include all SELF and OTHER possibilities.
+var eSituation = {
+    // general situations
     START         : 'start',         // at the start of the game (not the select screen)
     IDLE_CHATTER  : 'idle',          // happens between rounds
     REVIEW_HAND   : 'hand',          // after deal and after swap
     SWAP_CARDS    : 'swap',          // during AI phase
-    PRE_STRIP     : 'pre-strip',     // during reveal phase
-    STRIP         : 'strip',         // during strip phase
-    POST_STRIP    : 'post-strip',    // after a strip
-    PRE_FORFEIT   : 'pre-forfeit',   // during reveal phase
-    START_FORFEIT : 'start-forfeit', // when a forfeit starts
-    FORFEIT       : 'forfeit',       // during forfeit process
-    POST_FORFEIT  : 'post-forfeit',  // just after forfeit ends
+    PRE_REVEAL    : 'pre-reveal',    // just before the reveal phase
+    
+    // situations about this player
+    SELF_LOST           : 'self-lost',          // during reveal phase
+    SELF_PRE_STRIP      : 'self-pre-strip',     // during strip phase
+    SELF_STRIP          : 'self-strip',         // during strip phase
+    SELF_POST_STRIP     : 'self-post-strip',    // after a strip
+    SELF_PRE_FORFEIT    : 'self-pre-forfeit',   // during reveal phase
+    SELF_START_FORFEIT  : 'self-start-forfeit', // when a forfeit starts
+    SELF_FORFEIT        : 'self-forfeit',       // during forfeit process
+    SELF_POST_FORFEIT   : 'self-post-forfeit',  // just after forfeit ends
+    
+    // situations about other players
+    OTHER_LOST          : 'other-lost',          // during reveal phase
+    OTHER_PRE_STRIP     : 'other-pre-strip',     // during strip phase
+    OTHER_STRIP         : 'other-strip',         // during strip phase
+    OTHER_POST_STRIP    : 'other-post-strip',    // after a strip
+    OTHER_PRE_FORFEIT   : 'other-pre-forfeit',   // during reveal phase
+    OTHER_START_FORFEIT : 'other-start-forfeit', // when a forfeit starts
+    OTHER_FORFEIT       : 'other-forfeit',       // during forfeit process
+    OTHER_POST_FORFEIT  : 'other-post-forfeit',  // just after forfeit ends
+    
+    // end game situations
     VICTORY       : 'victory',       // when the game is won
     DEFEAT        : 'defeat'         // when the game is lost
 }
@@ -53,7 +71,7 @@ var eRelativeState = {
 /************************************************************
  * An enumeration for player exposure levels.
  **/
-// TODO: Consider replacing with or working with exact stages
+// TODO: Consider replacing with or also allowing exact stages
 var eExposure = {
     NONE     : 'none',
     CHEST    : 'chest',
@@ -73,9 +91,13 @@ var eExposure = {
  **/
 function Ticket() 
 {
+    // xml shortcuts
+    this.behaviour = null;
+    this.stage = null;
+    
     // always required
     var stage = 0;
-    var event = eEvent.IDLE_CHATTER;
+    var situation = eSituation.IDLE_CHATTER;
     var self = false;
     
     // event conditionals
@@ -87,6 +109,7 @@ function Ticket()
     var newExposure = eExposure.NONE;               // only during STRIP and POST_STRIP
     
     // other character additionals, in order of priority
+    // TODO: Add a priority setting to the behaviour file for each case
     var target = 0;                 // matches with IDs, the ID of the character affected
     var IDs = [];                   // a list of other character IDs in the game
     // TODO: Consider adding otherStages, with a +/- option

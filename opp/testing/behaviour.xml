@@ -2,12 +2,84 @@
 <opponent>
 
     <!-- Identifying Information -->
+    <!-- TODO: Move this to the meta file? -->
     <info>
-    
+        <name first="Elizabeth" last="" chosen="Elizabeth"/>
+        <body gender="female" breast-size="6"/>
+        <tags>
+            <tag>kind</tag>
+        </tags>
     </info>
+    
+    <!-- Clothing -->
+    <wardrobe>
+        
+    </wardrobe>
     
     <!-- Dialogue and Expressions -->
     <behaviour>
+        
+        <situation id="idle">
+            <default image="0-calm.png">
+                I am making IDLE CHATTER!
+            </default>
+        </situation>
+        <situation id="hand">
+            <default image="0-calm.png">
+                I am reacting to my HAND!
+            </default>
+        </situation>
+        <situation id="swap">
+            <default image="0-calm.png">
+                I am reacting to SWAPING cards!
+            </default>
+        </situation>
+        <situation id="pre-reveal">
+            <default image="0-calm.png">
+                I am reacting to the upcoming REVEAL!
+            </default>
+        </situation>
+        <situation id="self-lost">
+            <default image="0-calm.png">
+                I LOST!
+            </default>
+        </situation>
+        <situation id="other-lost">
+            <default image="0-calm.png">
+                Someone else LOST!
+            </default>
+        </situation>
+        <situation id="self-pre-strip">
+            <default image="0-calm.png">
+                I have to STRIP!
+            </default>
+        </situation>
+        <situation id="other-pre-strip">
+            <default image="0-calm.png">
+                Someone else has to STRIP!
+            </default>
+        </situation>
+        <situation id="self-strip">
+            <default image="0-calm.png">
+                I am STRIPPING!
+            </default>
+        </situation>
+        <situation id="other-strip">
+            <default image="0-calm.png">
+                Someone else is STRIPPING!
+            </default>
+        </situation>
+        <situation id="self-post-strip">
+            <default image="0-calm.png">
+                I had to STRIP!
+            </default>
+        </situation>
+        <situation id="other-post-strip">
+            <default image="0-calm.png">
+                Someone else had to STRIP!
+            </default>
+        </situation>
+        
         
     </behaviour>
 

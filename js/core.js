@@ -11,6 +11,9 @@
 var DEBUG = true;
 var KEYBINDINGS_ENABLED = true;
 
+// directory constants
+var OPP_DIR = "opp/";
+
 // screen constants
 var BASE_SCREEN_WIDTH = 1000;
 var BASE_FONT_SIZE = 14;
@@ -39,6 +42,13 @@ var table = new Table();
 /********************************************************************************
  * Game Wide Utility Functions
  ********************************************************************************/
+
+/**********************************************************************
+ * Returns a random number in a range.
+ **/
+function getRandomNumber (min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
+}
 
 /**********************************************************************
  * Returns the width of the visible screen in pixels.
@@ -83,7 +93,11 @@ function autoResize ()
 function initCore () 
 {
     // initialization
-    
+    // TODO: Implement screens to do this shit
+    for (var i = FIRST_AI; i < table.players.length; i++) {
+        table.players[i].ID = "testing/";
+        loadBehaviour(table.players[i]);
+    }
     
     // post initialization
     autoResize();
