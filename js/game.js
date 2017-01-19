@@ -36,8 +36,8 @@ var AUTO_MODE_TIMER = 200;
 var AUTO_HIDE = true;
 
 // ai pseudo constants
-var AI_SWAP_DELAY = 100;
-var AI_END_TURN_DELAY = 50;
+var AI_SWAP_DELAY = 1000;
+var AI_END_TURN_DELAY = 500;
 var AI_STRIP_DELAY = 1000;
 
 
@@ -48,7 +48,20 @@ var AI_STRIP_DELAY = 1000;
 // main variables
 var gamePhase = eGamePhase.DEAL;
 var rankedPlayers = [];
+var winners = [];
+var bystanders = [];
+var losers = [];
 var advanceAllowed = true;
+
+// Okay, this one seems complicated but I promise it makes sense.
+// The chain of stripping or forfeiting events is a series of 
+// highly connected functions. This function is updated by each
+// function in the chain to point to the next point in the chain,
+// which is called by the next phase of the game.
+// The reason for this is avoid checking the strip rule and status
+// every time you want to update the behaviours.
+var stripChainFunction = null;
+var stripChainParameters = [];
 
 // debugging variables
 var debugOutcomes = [eOutcome.BYSTANDER, 
@@ -179,6 +192,7 @@ function takeTurn(turn)
         table.dullCardsSingle(table.players[turn]);
         
         // update behaviour
+        // TODO: Set the number of card in the ticket?
         setSingleSituation(eSituation.SWAP_CARDS, table.players[turn]);
         updateBehaviour(table.players[turn]);
     }
@@ -304,15 +318,24 @@ function executeRevealPhase()
         rankedPlayers = temp;
     }
     
-    // mark the losers and winners based on strip rule
+    // update based on strip rule
     switch (table.rule) 
     {
         case eStripRule.LOSER: {
-            // mark the winners and losers
-            rankedPlayers[rankedPlayers.length - 1].outcome = eOutcome.LOSER;
+            // update the outcome arrays
+            winners = [];
+            
+            bystanders = [];
             for (var i = 0; i < rankedPlayers.length - 1; i++) {
+                bystanders.push(rankedPlayers[i]);
                 rankedPlayers[i].outcome = eOutcome.BYSTANDER;
             }
+            
+            losers = [];
+            losers.push(rankedPlayers[rankedPlayers.length - 1]);
+            rankedPlayers[rankedPlayers.length - 1].outcome = eOutcome.LOSER;
+            
+            // mark the winners and losers
             table.setMarks();
             
             // update behaviour
@@ -380,12 +403,41 @@ function finishRetrievePhase()
     if (AUTO_HIDE) {
         table.showTable(false);
     }
+
+    // determine what to do based on strip rule
+    switch (table.rule) 
+    {
+        case eStripRule.LOSER: {
+            if (losers.length === 1) {
+                preDetermineLoserMode(losers[0]);
+            }
+            else {
+                console.error("[finishRetrievePhase] LOSER strip rule violation, there are '" + losers.length + "' losers");
+            }
+            break;
+        }
+    
+            
+        // TODO: Adjust all cases below
+        case eStripRule.WINNER: {
+            break;
+        }
+            
+        case eStripRule.PARTY: {
+            break;
+        }
+            
+        case eStripRule.SUDDEN: {
+            break;
+        }
+    }
     
     // update behaviour
-    setTargetedSituation(eSituation.SELF_PRE_STRIP, 
-                         rankedPlayers[rankedPlayers.length - 1], 
-                         eSituation.OTHER_PRE_STRIP);
-    updateAllBehaviours();
+    // TODO: Set this up in the wardrobe class (strip or forfeit?)
+    //setTargetedSituation(eSituation.SELF_PRE_STRIP, 
+    //                     rankedPlayers[rankedPlayers.length - 1], 
+    //                     eSituation.OTHER_PRE_STRIP);
+    //updateAllBehaviours();
     
     // allow advancement
     allowAdvancement(true);
@@ -403,30 +455,23 @@ function executeStripPhase()
 {
     console.log("[executeStripPhase] Strip phase has begun...");
 
-    // TODO: ALL OF THIS IS TEMPORARY
-    // reduce the loser
-    rankedPlayers[rankedPlayers.length - 1].count -= 1;
-    
-    if (rankedPlayers[rankedPlayers.length - 1].count <= 0) {
-        rankedPlayers[rankedPlayers.length - 1].inGame = false;
-        rankedPlayers[rankedPlayers.length - 1].hand.collect(table.deck);
-        
-        // TODO: ALSO RESET THE DEBUG BUTTONS
+    // call the next function in the chain
+    if (stripChainFunction !== null) {
+        stripChainFunction(stripChainParameters);
+    }
+    else {
+        console.error("[executeStripPhase] Strip chain undetermined");
+        return;
     }
     
     
-    // update behaviour
-    setTargetedSituation(eSituation.SELF_STRIP, 
-                         rankedPlayers[rankedPlayers.length - 1], 
-                         eSituation.OTHER_STRIP);
-    updateAllBehaviours();
-    
+    // TODO: Everything here is temporary and kind of weak
+    // TODO: Start by reinforcing this area of the code
+
     // give the character time to strip
     window.setTimeout(function() {
         finishStripPhase();
     }, AI_STRIP_DELAY);
-    
-    
 }
 
 /**********************************************************************
@@ -435,11 +480,14 @@ function executeStripPhase()
 function finishStripPhase() {
     console.log("[finishStripPhase] Strip phase is finishing...");
     
-    // update behaviour
-    setTargetedSituation(eSituation.SELF_POST_STRIP, 
-                         rankedPlayers[rankedPlayers.length - 1], 
-                         eSituation.OTHER_POST_STRIP);
-    updateAllBehaviours();
+    // call the next function in the chain
+    if (stripChainFunction !== null) {
+        stripChainFunction(stripChainParameters);
+    }
+    else {
+        console.error("[executeStripPhase] Strip chain undetermined");
+        return;
+    }
     
     // allow advancement
     allowAdvancement(true);
@@ -636,6 +684,13 @@ function advanceGame()
     
     // disable advance until the next phase allows it
     allowAdvancement(false);
+    
+    // update the forfeit timers
+    // TODO: It gets caught at the forced advance between DEAL and AI
+    updateForfeits();
+    if (forfeitInterrupt) {
+        return;
+    }
     
     // execute game phase
     switch (gamePhase) 

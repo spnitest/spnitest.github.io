@@ -53,8 +53,8 @@ var DULL_CARD = "dull";
 
 // deal related psuedo constants
 var DEAL_LOCATION = ["3%", "3%"];
-var DEAL_ANIM_TIME = 0;
-var DEAL_ANIM_SPACING = 0;
+var DEAL_ANIM_TIME = 300;
+var DEAL_ANIM_SPACING = 100;
 
 
 /**********************************************************************

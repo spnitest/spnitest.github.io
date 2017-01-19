@@ -35,7 +35,7 @@ function updateBehaviour(player)
     findXMLState(player, null);
     
     $dialogues[player.slot - 1].html(player.state.dialogue);
-    //$images[player.slot - 1].attr("src", OPP_DIR + player.ID + player.state.image);
+    $images[player.slot - 1].attr("src", OPP_DIR + player.ID + player.state.image);
 }
 
 /**********************************************************************
@@ -47,6 +47,8 @@ function updateAllBehaviours()
         updateBehaviour(table.players[i]);
     }
 }
+
+// TODO: When situation is updated, clear the parser tokens?
 
 /**********************************************************************
  * Sets the situation for the chosen player.

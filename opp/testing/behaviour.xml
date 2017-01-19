@@ -4,81 +4,958 @@
     <!-- Identifying Information -->
     <!-- TODO: Move this to the meta file? -->
     <info>
-        <name first="Elizabeth" last="" chosen="Elizabeth"/>
+        <name first="S.P.D.A" last="" chosen="S.P.D.A"/>
         <body gender="female" breast-size="6"/>
         <tags>
             <tag>kind</tag>
+            <tag>robot</tag>
         </tags>
     </info>
     
     <!-- Clothing -->
     <wardrobe>
-        
+        <article name="socks" proper="Socks" position="feet" reveal="final"/>
+        <article name="skirt" proper="Skirt" position="waist" reveal="major"/>
+        <article name="shirt" proper="Shirt" position="chest" reveal="major"/>
+        <article name="bra" proper="Bra" position="chest" reveal="final"/>
+        <article name="panties" proper="Panties" position="waist" reveal="final"/>
     </wardrobe>
     
     <!-- Dialogue and Expressions -->
+    <!-- TODO: Clean up which situations are in each stage -->
     <behaviour>
         
-        <situation id="idle">
-            <default image="0-calm.png">
-                I am making IDLE CHATTER!
-            </default>
-        </situation>
-        <situation id="hand">
-            <default image="0-calm.png">
-                I am reacting to my HAND!
-            </default>
-        </situation>
-        <situation id="swap">
-            <default image="0-calm.png">
-                I am reacting to SWAPING cards!
-            </default>
-        </situation>
-        <situation id="pre-reveal">
-            <default image="0-calm.png">
-                I am reacting to the upcoming REVEAL!
-            </default>
-        </situation>
-        <situation id="self-lost">
-            <default image="0-calm.png">
-                I LOST!
-            </default>
-        </situation>
-        <situation id="other-lost">
-            <default image="0-calm.png">
-                Someone else LOST!
-            </default>
-        </situation>
-        <situation id="self-pre-strip">
-            <default image="0-calm.png">
-                I have to STRIP!
-            </default>
-        </situation>
-        <situation id="other-pre-strip">
-            <default image="0-calm.png">
-                Someone else has to STRIP!
-            </default>
-        </situation>
-        <situation id="self-strip">
-            <default image="0-calm.png">
-                I am STRIPPING!
-            </default>
-        </situation>
-        <situation id="other-strip">
-            <default image="0-calm.png">
-                Someone else is STRIPPING!
-            </default>
-        </situation>
-        <situation id="self-post-strip">
-            <default image="0-calm.png">
-                I had to STRIP!
-            </default>
-        </situation>
-        <situation id="other-post-strip">
-            <default image="0-calm.png">
-                Someone else had to STRIP!
-            </default>
-        </situation>
+        <stage id="0">
+        
+            <situation id="idle">
+                <default img="0-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="0-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="0-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="0-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="0-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="0-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="0-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="0-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="0-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="0-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="0-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="0-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="0-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="0-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="0-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="0-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="0-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="0-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="0-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="0-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="0-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="0-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
+        
+        
+        <stage id="1">
+        
+            <situation id="idle">
+                <default img="1-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="1-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="1-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="1-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="1-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="1-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="1-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="1-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="1-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="1-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="1-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="1-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="1-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="1-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="1-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="1-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="1-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="1-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="1-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="1-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="1-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="1-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
+        
+        
+        <stage id="2">
+        
+            <situation id="idle">
+                <default img="2-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="2-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="2-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="2-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="2-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="2-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="2-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="2-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="2-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="2-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="2-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="2-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="2-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="2-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="2-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="2-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="1-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="1-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="2-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="2-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="2-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="2-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
+        
+        
+        <stage id="3">
+        
+            <situation id="idle">
+                <default img="3-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="3-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="3-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="3-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="3-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="3-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="3-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="3-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="3-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="3-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="3-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="3-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="3-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="3-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="3-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="3-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="3-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="3-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="3-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="3-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="3-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="3-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
+        
+        
+        <stage id="4">
+        
+            <situation id="idle">
+                <default img="4-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="4-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="4-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="4-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="4-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="4-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="4-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="4-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="4-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="4-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="4-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="4-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="4-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="4-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="4-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="4-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="4-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="4-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="4-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="4-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="4-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="4-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
+        
+        
+        <stage id="5">
+        
+            <situation id="idle">
+                <default img="5-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="5-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="5-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="5-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="5-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="5-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="5-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="5-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="5-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="5-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="5-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="5-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="5-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="5-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="5-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="5-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="5-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="5-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="5-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="5-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="5-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="5-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
+        
+        
+        <stage id="6">
+        
+            <situation id="idle">
+                <default img="6-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="6-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="6-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="6-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="6-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="6-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="6-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="6-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="6-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="6-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="6-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="6-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="6-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="6-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="6-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="6-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="6-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="6-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="6-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="6-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-forfeit-end">
+                <default img="6-calm.png">
+                    I am CUMMING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="6-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="6-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
+        
+        
+        <stage id="7">
+        
+            <situation id="idle">
+                <default img="7-calm.png">
+                    I am making IDLE CHATTER!
+                </default>
+            </situation>
+            <situation id="hand">
+                <default img="7-calm.png">
+                    I am reacting to my HAND!
+                </default>
+            </situation>
+            <situation id="swap">
+                <default img="7-calm.png">
+                    I am reacting to SWAPING cards!
+                </default>
+            </situation>
+            <situation id="pre-reveal">
+                <default img="7-calm.png">
+                    I am reacting to the upcoming REVEAL!
+                </default>
+            </situation>
+            <situation id="self-lost">
+                <default img="7-calm.png">
+                    I LOST!
+                </default>
+            </situation>
+            <situation id="other-lost">
+                <default img="7-calm.png">
+                    Someone else LOST!
+                </default>
+            </situation>
+            <situation id="self-pre-strip">
+                <default img="7-calm.png">
+                    I have to STRIP!
+                </default>
+            </situation>
+            <situation id="other-pre-strip">
+                <default img="7-calm.png">
+                    Someone else has to STRIP!
+                </default>
+            </situation>
+            <situation id="self-strip">
+                <default img="7-calm.png">
+                    I am STRIPPING!
+                </default>
+            </situation>
+            <situation id="other-strip">
+                <default img="7-calm.png">
+                    Someone else is STRIPPING!
+                </default>
+            </situation>
+            <situation id="self-post-strip">
+                <default img="7-calm.png">
+                    I had to STRIP!
+                </default>
+            </situation>
+            <situation id="other-post-strip">
+                <default img="7-calm.png">
+                    Someone else had to STRIP their ~clothing-name~!
+                </default>
+            </situation>
+            <situation id="self-pre-forfeit">
+                <default img="7-calm.png">
+                    I have to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-pre-forfeit">
+                <default img="7-calm.png">
+                    Someone else has to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-start-forfeit">
+                <default img="7-calm.png">
+                    I am starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-start-forfeit">
+                <default img="7-calm.png">
+                    Someone else is starting to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-post-start-forfeit">
+                <default img="7-calm.png">
+                    I just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-start-forfeit">
+                <default img="7-calm.png">
+                    Someone else just started to FORFEIT!
+                </default>
+            </situation>
+            <situation id="self-forfeit">
+                <default img="7-calm.png">
+                    I am FORFEITING!
+                </default>
+            </situation>
+            <situation id="other-forfeit">
+                <default img="7-calm.png">
+                    Someone else is FORFEITING!
+                </default>
+            </situation>
+            <situation id="self-post-forfeit">
+                <default img="7-calm.png">
+                    I had to FORFEIT!
+                </default>
+            </situation>
+            <situation id="other-post-forfeit">
+                <default img="7-calm.png">
+                    Someone else had to FORFEIT!
+                </default>
+            </situation>
+            
+        </stage>
         
         
     </behaviour>

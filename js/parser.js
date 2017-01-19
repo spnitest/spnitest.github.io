@@ -6,13 +6,14 @@
  ********************************************************************************/
 
 
+ // TODO: Migrate basic info to the meta file
+
 /**********************************************************************
  * Loading Functions
  **********************************************************************/
 
 /**********************************************************************
  * Loads the XML of this Player and sets up all of their basic info.
- * TODO: Migrate basic info to the meta file
  **/
 function loadBehaviour(player, callbackMethod)
 {
@@ -29,11 +30,24 @@ function loadBehaviour(player, callbackMethod)
             // get a reference to the player's behaviour
             player.ticket.behaviour = $(xml).find("behaviour");
             if (player.ticket.behaviour.length === 0) {
-                console.error("[findXMLState] Couldn't find the behaviour section for '" + player.ID + "'");
+                console.error("[loadBehaviour] Couldn't find the behaviour section for '" + player.ID + "'");
                 return;
             }
             
-            // TODO: parse the opponent info, to be moved to meta file
+            // get a reference to the first stage for this player
+            $(player.ticket.behaviour).find("stage").each(function () {
+               if ($(this).attr("id") === "0") {
+                   player.ticket.stage = $(this);
+                   return;
+               } 
+            });
+            if (!player.ticket.stage) {
+                console.error("[loadBehaviour] Couldn't find stage 0 for '" + player.ID + "'");
+                return;
+            }
+            
+            // parse the wardrobe
+            loadWardrobe(player, xml);
             
             // TODO: call the callback
         },
@@ -41,6 +55,31 @@ function loadBehaviour(player, callbackMethod)
             console.error("[loadBehaviour] '" + OPP_DIR + player.ID + "behaviour.xml' could not be found!");
         }
     });
+}
+
+/**********************************************************************
+ * Loads the wardrobe of this player from XML.
+ **/
+function loadWardrobe(player, xml) 
+{
+    var wardrobe = $(xml).find("wardrobe");
+    if (wardrobe.length === 0) {
+        console.error("[loadWardrobe] Couldn't find the wardrobe section for '" + player.ID + "'");
+        return;
+    }
+    else {
+        $(wardrobe).find("article").each(function () {
+            var name = $(this).attr("name");
+            var proper = $(this).attr("proper");
+            var position = $(this).attr("position");
+            var type = $(this).attr("reveal");
+            
+            // TODO: Add a basic check and error message
+            var clothing = new Clothing(name, proper, position, type);
+            
+            player.wardrobe.clothes.unshift(clothing);
+        });
+    }
 }
 
 
@@ -54,41 +93,43 @@ function loadBehaviour(player, callbackMethod)
  **/
 function findXMLState(player, log) 
 {
-    console.log("[findXMLState] Player '" + player.ID + "' is requesting a new state");
+    console.log("[findXMLState] Player '" + player.ID + "' is requesting state for '" + player.ticket.situation + "'");
     
     // make some shortcuts
     var ticket = player.ticket;
     var xml = player.xml;
     var behaviour = ticket.behaviour;
-    // TODO: Add stage shortcut
+    var stage = ticket.stage;
     
     // sanity check
-    if (xml === null || behaviour === null) {
+    if (xml === null || behaviour === null || stage === null) {
         console.error("[findXMLState] Player '" + player.ID + "' does not have XML loaded");
         return;
     }
     
     // find the correct situation
     var situation = null;
-    $(behaviour).find("situation").each(function () {
+    $(stage).find("situation").each(function () {
        if ($(this).attr("id") === ticket.situation) {
            situation = $(this);
        } 
     });
     
-    // find the best matching cases with the highest priorities
-    var cases = [];
-    var priority = 0;
-    $(situation).find("case").each(function () {
-        
-    });
+    // quick check for completeness
+    if (situation === null) {
+        console.error("[findXMLState] Player '" + player.ID + "', is missing situation for '" + ticket.situation + "'");
+        return;
+    }
     
+    // find the best matching cases with the highest priorities
+    var cases = collectCases(situation, ticket);
+
     // if no cases were found, or priority is 0, add the default case
     if (cases.length === 0 || priority === 0) {
         var defaultCase = $(situation).find("default");
         
         if (defaultCase.length === 0) {
-            console.error("[findXMLState] Player '" + player.ID + "', situation '" + ticket.situation + "' has no default or matching case.");
+            console.error("[findXMLState] Player '" + player.ID + "', situation '" + ticket.situation + "' has no default or matching case");
             return;
         }
         
@@ -98,41 +139,23 @@ function findXMLState(player, log)
     // select a case a random from the collected set
     var random = getRandomNumber(0, cases.length);
     
-    // TODO: Let State parse the case
-    player.state.dialogue = cases[random].html();
+    // let state parse the case
+    player.state.construct(cases[random]);
 }
 
-
-
-// TODO: Replace this with that ^
-function parserTest(player) 
+/**********************************************************************
+ * Collects and returns a set of cases based on the provided data.
+ **/
+function collectCases(situation, ticket) 
 {
-    // make things simpler
-    var ticket = player.ticket;
-    var xml = player.xml;
+    var cases = [];
+    var priority = 0;
     
-    console.log("[parserTest] Player requesting dialogue for " + ticket.situation);
-    
-    // TODO: add some better fucking safety checks
-    if (xml === null) {
-        return;
-    }
-    
-    // find the behaviour section
-    var behaviour = $(xml).find("behaviour");
-    if (!behaviour) {
-        console.error("[parserTest] Couldn't find the behaviour section for '" + player.ID + "'");
-        return;
-    }
-    
-    // find a case with a matching situation
-    $(xml).find("case").each(function () {
-        if ($(this).attr("situation") === ticket.situation) {
-            // TODO: move this code to State and let it parse it
-            // it has to do something other than just sit there
-            // also remember that STATES not CASES should be sent
-            player.state.dialogue = $(this).html();
-            player.state.image = $(this).attr("img");
-        }                     
+    $(situation).find("case").each(function () {
+        // TODO: Implement
+        // TODO: First get cases with data specific to this situation
+        // TODO: Then expand to the general data
     });
+    
+    return cases;
 }
