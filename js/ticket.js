@@ -107,7 +107,6 @@ function Ticket()
     var swappedCards = 0;                           // only during SWAP_CARDS
     
     // TODO: Add the number of cards being swapped as an option
-    // TODO: Add the Wardrobe class
     //var clothingPos = eClothingPosition.OTHER;      // only during OTHER_(strip)
     //var clothingType = eClothingType.ACCESSORY;     // only during OTHER_(strip)
     var newExposure = eExposure.NONE;               // only during OTHER_(strip)

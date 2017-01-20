@@ -81,9 +81,7 @@ function preDetermineLoserMode(player)
     }
     else if (player.inGame) {
         // this player will forfeit
-        // TODO: Make this a function on the player (wrap these two things together so that you never forget them)
-        player.inGame = false;
-        player.hand.collect(table.deck);
+        player.setLost();
         
         if (player.slot != HUMAN) {
             stripChainFunction = startForfeitLoserMode;
@@ -118,7 +116,6 @@ function stripPlayerLoserMode(params)
     
     // update the tokens in the parser
     // TODO: Add a function for this somewhere
-    // TODO: Rename them to Dialogue Tokens
     clearDialogueTokens();
     makeDialogueToken("clothing-name", clothing.name);
     makeDialogueToken("clothing-proper", clothing.proper);

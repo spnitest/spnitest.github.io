@@ -99,3 +99,12 @@ Player.prototype.updateStage = function()
         return;
     }
 }
+
+/**********************************************************************
+ * Sets the player to be out of the game.
+ **/
+Player.prototype.setLost = function () 
+{
+    this.inGame = false;
+    this.hand.collect(table.deck);
+}

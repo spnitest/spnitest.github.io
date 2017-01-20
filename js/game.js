@@ -36,9 +36,9 @@ var AUTO_MODE_TIMER = 200;
 var AUTO_HIDE = true;
 
 // ai pseudo constants
-var AI_SWAP_DELAY = 1000;
-var AI_END_TURN_DELAY = 500;
-var AI_STRIP_DELAY = 1000;
+var AI_SWAP_DELAY = 300;
+var AI_END_TURN_DELAY = 100;
+var AI_STRIP_DELAY = 500;
 
 
 /**********************************************************************
@@ -52,6 +52,7 @@ var winners = [];
 var bystanders = [];
 var losers = [];
 var advanceAllowed = true;
+var interruptAllowed = true;
 
 // Okay, this one seems complicated but I promise it makes sense.
 // The chain of stripping or forfeiting events is a series of 
@@ -77,6 +78,7 @@ var debugOutcomes = [eOutcome.BYSTANDER,
 
 $advanceButton = $("#game-advance-button");
 $cardButtons = [$("#hc1"), $("#hc2"), $("#hc3"), $("#hc4"), $("#hc5")];
+$autoButton = $("#game-auto-button");
 
 
 /********************************************************************************
@@ -93,7 +95,7 @@ function loadGameScreen()
     // set default state
     autoMode = false;
     allowCardButtons(false);
-    allowAdvancement(true);
+    allowAdvancement(true, false);
     
     // attach the shortcut handler
     document.addEventListener('keyup', gameKeyUP, false);
@@ -154,7 +156,7 @@ function finishDealPhase()
     updateAllBehaviours();
     
     // force advancement
-    allowAdvancement(true);
+    allowAdvancement(true, true);
     advanceGame();
 }
 
@@ -192,7 +194,7 @@ function takeTurn(turn)
         table.dullCardsSingle(table.players[turn]);
         
         // update behaviour
-        // TODO: Set the number of card in the ticket?
+        // TODO: Set the number of cards in the ticket?
         setSingleSituation(eSituation.SWAP_CARDS, table.players[turn]);
         updateBehaviour(table.players[turn]);
     }
@@ -239,7 +241,8 @@ function advanceTurn(turn)
     }
     else {
         // allow advancement
-        allowAdvancement(true);
+        interruptAllowed = true;
+        allowAdvancement(true, false);
         
         // if human player is out, force advancement
         if (!table.players[HUMAN].inGame) {
@@ -275,7 +278,7 @@ function executeSwapPhase()
     updateAllBehaviours();
     
     // allow advancement
-    allowAdvancement(true);
+    allowAdvancement(true, false);
 }
 
 
@@ -372,7 +375,7 @@ function executeRevealPhase()
     }
     
     // allow advancement
-    allowAdvancement(true);
+    allowAdvancement(true, false);
 }
 
 
@@ -432,15 +435,8 @@ function finishRetrievePhase()
         }
     }
     
-    // update behaviour
-    // TODO: Set this up in the wardrobe class (strip or forfeit?)
-    //setTargetedSituation(eSituation.SELF_PRE_STRIP, 
-    //                     rankedPlayers[rankedPlayers.length - 1], 
-    //                     eSituation.OTHER_PRE_STRIP);
-    //updateAllBehaviours();
-    
     // allow advancement
-    allowAdvancement(true);
+    allowAdvancement(true, false);
 }
 
 
@@ -463,10 +459,6 @@ function executeStripPhase()
         console.error("[executeStripPhase] Strip chain undetermined");
         return;
     }
-    
-    
-    // TODO: Everything here is temporary and kind of weak
-    // TODO: Start by reinforcing this area of the code
 
     // give the character time to strip
     window.setTimeout(function() {
@@ -490,7 +482,7 @@ function finishStripPhase() {
     }
     
     // allow advancement
-    allowAdvancement(true);
+    allowAdvancement(true, false);
 }
 
 
@@ -501,7 +493,7 @@ function finishStripPhase() {
 /**********************************************************************
  * Allows or disallows the game to advance to the next phase.
  **/
-function allowAdvancement(allow) 
+function allowAdvancement(allow, forced) 
 {
     if (AUTO_MODE) {
         // auto mode is on, player cannot manually advance
@@ -522,8 +514,12 @@ function allowAdvancement(allow)
         $advanceButton.html(gamePhase);
     }
     
-    // update the flag
+    // update the flags
     advanceAllowed = allow;
+    
+    if (forced !== null) {
+        interruptAllowed = !forced;
+    }
 }
 
 /**********************************************************************
@@ -555,7 +551,15 @@ function selectCard(card)
  **/
 function toggleAutoMode() 
 {
+    // TODO: Add visual state (add an active class, handle the visuals in CSS)
     AUTO_MODE = !AUTO_MODE;
+    
+    if (AUTO_MODE) {
+        $autoButton.addClass("active");
+    }
+    else {
+        $autoButton.removeClass("active");
+    }
 }
 
 /**********************************************************************
@@ -683,13 +687,15 @@ function advanceGame()
     }
     
     // disable advance until the next phase allows it
-    allowAdvancement(false);
+    allowAdvancement(false, null);
     
     // update the forfeit timers
     // TODO: It gets caught at the forced advance between DEAL and AI
-    updateForfeits();
-    if (forfeitInterrupt) {
-        return;
+    if (interruptAllowed) {
+        updateForfeits();
+        if (forfeitInterrupt) {
+            return;
+        }
     }
     
     // execute game phase

@@ -317,6 +317,13 @@
     bottom: 4%;
     right: 1%;
     font-size: 130%;
+    background: linear-gradient(#CCCCCC, #AAAAAA);
+    background-color: #CCCCCC;
+}
+
+#game-auto-button.active {
+    background: linear-gradient(#BB3333, #9F1616);
+	background-color: #BB3333;
 }
 
 .game-clothing-area {
