@@ -110,7 +110,7 @@ $dockArea = $("#dock-area");
 /**********************************************************************
  * (Object) A poker table and everything involved in it.
  **/
-function Table() 
+function Table () 
 {
     this.players = [];
     for (var i = 0; i < 5; i++) {
@@ -518,7 +518,7 @@ function animateCardIn (row, card, callbackMethod)
 /**********************************************************************
  * The player clicked on the hide button.
  **/
-function toggleGameTable() 
+function toggleGameTable () 
 {
     table.showTable(!gameTableShown);
 }

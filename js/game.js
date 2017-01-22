@@ -88,7 +88,7 @@ $autoButton = $("#game-auto-button");
 /**********************************************************************
  * Loads and initializes the game screen.
  **/
-function loadGameScreen() 
+function loadGameScreen () 
 {
     console.log("[loadGameScreen] Game screen is loading...");
     
@@ -107,7 +107,7 @@ function loadGameScreen()
 /**********************************************************************
  * Unloads and resets the game screen.
  **/
-function unloadGameScreen() 
+function unloadGameScreen () 
 {
     
 }
@@ -120,7 +120,7 @@ function unloadGameScreen()
 /**********************************************************************
  * Executes the deal phase of the game.
  **/
-function executeDealPhase() 
+function executeDealPhase () 
 {
     console.log("[executeDealPhase] Deal phase has begun...");
     
@@ -141,7 +141,7 @@ function executeDealPhase()
 /**********************************************************************
  * Finishes the deal phase of the game.
  **/
-function finishDealPhase() 
+function finishDealPhase () 
 {
     console.log("[finishDealPhase] Deal phase is finishing...");
     
@@ -168,7 +168,7 @@ function finishDealPhase()
 /**********************************************************************
  * Executes the AI phase of the game.
  **/
-function executeAIPhase() 
+function executeAIPhase () 
 {
     console.log("[executeAIPhase] AI phase has begun...");
     
@@ -184,7 +184,7 @@ function executeAIPhase()
 /**********************************************************************
  * Executes an AI turn.
  **/
-function takeTurn(turn) 
+function takeTurn (turn) 
 {
     console.log("[takeTurn] AI " + turn + " is taking their turn...");
     
@@ -213,7 +213,7 @@ function takeTurn(turn)
 /**********************************************************************
  * Advances the turn and checks for the end of the phase.
  **/
-function advanceTurn(turn) 
+function advanceTurn (turn) 
 {
     console.log("[advanceTurn] AI " + turn + " is finishing their turn...");
     
@@ -259,7 +259,7 @@ function advanceTurn(turn)
 /**********************************************************************
  * Executes the swap phase of the game.
  **/
-function executeSwapPhase() 
+function executeSwapPhase () 
 {
     console.log("[executeSwapPhase] Swap phase has begun...");
 
@@ -289,7 +289,7 @@ function executeSwapPhase()
 /**********************************************************************
  * Executes the reveal phase of the game.
  **/
-function executeRevealPhase() 
+function executeRevealPhase () 
 {
     console.log("[executeRevealPhase] Reveal phase has begun...");
 
@@ -386,7 +386,7 @@ function executeRevealPhase()
 /**********************************************************************
  * Executes the retrieve phase of the game.
  **/
-function executeRetrievePhase() 
+function executeRetrievePhase () 
 {
     console.log("[executeRetrievePhase] Retrieve phase has begun...");
 
@@ -398,7 +398,7 @@ function executeRetrievePhase()
 /**********************************************************************
  * Finishes the retrieve phase of the game.
  **/
-function finishRetrievePhase() 
+function finishRetrievePhase () 
 {
     console.log("[finishRetrievePhase] Retrieve phase is finishing...");
     
@@ -447,7 +447,7 @@ function finishRetrievePhase()
 /**********************************************************************
  * Executes the strip phase of the game.
  **/
-function executeStripPhase() 
+function executeStripPhase () 
 {
     console.log("[executeStripPhase] Strip phase has begun...");
 
@@ -469,7 +469,7 @@ function executeStripPhase()
 /**********************************************************************
  * Finishes the strip phase of the game.
  **/
-function finishStripPhase() {
+function finishStripPhase () {
     console.log("[finishStripPhase] Strip phase is finishing...");
     
     // call the next function in the chain
@@ -493,7 +493,7 @@ function finishStripPhase() {
 /**********************************************************************
  * Allows or disallows the game to advance to the next phase.
  **/
-function allowAdvancement(allow, forced) 
+function allowAdvancement (allow, forced) 
 {
     if (AUTO_MODE) {
         // auto mode is on, player cannot manually advance
@@ -525,7 +525,7 @@ function allowAdvancement(allow, forced)
 /**********************************************************************
  * Enables or disables the card buttons.
  **/
-function allowCardButtons(allow) 
+function allowCardButtons (allow) 
 {
     for (var i = 0; i < $cardButtons.length; i++) {
         $cardButtons[i].attr("disabled", !allow);
@@ -540,7 +540,7 @@ function allowCardButtons(allow)
 /**********************************************************************
  * The player clicked on one of thier cards.
  **/
-function selectCard(card) 
+function selectCard (card) 
 {
     table.players[HUMAN].hand.trade[card] = !table.players[HUMAN].hand.trade[card];
     table.dullCards(eGroup.HUMAN);
@@ -549,7 +549,7 @@ function selectCard(card)
 /**********************************************************************
  * The player clicked on the auto button.
  **/
-function toggleAutoMode() 
+function toggleAutoMode () 
 {
     // TODO: Add visual state (add an active class, handle the visuals in CSS)
     AUTO_MODE = !AUTO_MODE;
@@ -565,7 +565,7 @@ function toggleAutoMode()
 /**********************************************************************
  * The player clicked on a winner button.
  **/
-function setDebugWinner(player) 
+function setDebugWinner (player) 
 {
     setDebugOutcome(player, eOutcome.WINNER);
 }
@@ -573,7 +573,7 @@ function setDebugWinner(player)
 /**********************************************************************
  * The player clicked on a loser button.
  **/
-function setDebugLoser(player) 
+function setDebugLoser (player) 
 {
     setDebugOutcome(player, eOutcome.LOSER);
 }
@@ -581,7 +581,7 @@ function setDebugLoser(player)
 /**********************************************************************
  * Sets the winner and loser debug variables based on the game type.
  **/
-function setDebugOutcome(player, outcome) 
+function setDebugOutcome (player, outcome) 
 {
     // update this player
     if (debugOutcomes[player] != outcome) {
@@ -668,7 +668,7 @@ function setDebugOutcome(player, outcome)
  * The player clicked on the advance button. This will handle the 
  * current phase of the game by calling the appropriate function.
  **/
-function advanceGame() 
+function advanceGame () 
 {
     console.log("[advanceGame] Advancing to the next game phase...");
     
@@ -690,7 +690,6 @@ function advanceGame()
     allowAdvancement(false, null);
     
     // update the forfeit timers
-    // TODO: It gets caught at the forced advance between DEAL and AI
     if (interruptAllowed) {
         updateForfeits();
         if (forfeitInterrupt) {
@@ -738,7 +737,7 @@ function advanceGame()
         }
             
         default: {
-            console.error("[advanceGame] Fatal Error: Game is in an undefined state.");
+            console.error("[advanceGame] Game is in an undefined state.");
         }
     }
 }
@@ -751,7 +750,7 @@ function advanceGame()
 /**********************************************************************
  * Binds to the keyboard to handle hotkeys.
  **/
-function gameKeyUP(e) 
+function gameKeyUP (e) 
 {
     if (KEYBINDINGS_ENABLED) {
         if (e.keyCode === KEY_SPACE && advanceAllowed) {

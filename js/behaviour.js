@@ -48,7 +48,7 @@ function updateAllBehaviours()
     }
 }
 
-// TODO: When situation is updated, clear the parser tokens?
+// TODO: When situation is updated, clear the dialogue tokens?
 
 /**********************************************************************
  * Sets the situation for the chosen player.

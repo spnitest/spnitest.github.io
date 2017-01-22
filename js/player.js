@@ -42,6 +42,10 @@ function Player()
     this.inGame = true;
     this.hasForfeit = false;   // set after first forfeit has ended
     this.xml = null;
+    
+    // player info
+    this.name = "";
+    this.gender = eGender.FEMALE;
 
     // behaviour stuff
     this.stage = 0;

@@ -38,7 +38,7 @@ var eClothingType = {
  * (Object) An article of clothing. Image is optional, used for human
  * player"s clothing.
  **/
-function Clothing(name, proper, position, type, image) 
+function Clothing (name, proper, position, type, image) 
 {
     this.name = name;
     this.proper = proper;

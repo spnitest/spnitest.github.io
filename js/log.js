@@ -16,10 +16,22 @@
  * contined in this object is already stored in other classes, but here
  * it is stored in a manor that is easily accesible for the Parser.
  **/
-function Log() 
+function Log () 
 {
     // static information
-    var IDs = [];
-    var names = [];
+    this.IDs = [];
+    this.names = [];
+    this.genders = [];
     
+    // major events
+    this.chestRevealed = [];
+    this.crotchRevealed = [];
+    this.firstForfeit = [];
+    
+    // one major event per gender
+    for (var gender in eGender) {
+        this.chestRevealed.push(false);
+        this.crotchRevealed.push(false);
+        this.firstForfeit.push(false);
+    }
 }

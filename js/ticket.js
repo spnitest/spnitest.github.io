@@ -113,6 +113,7 @@ function Ticket()
     
     // other character additionals, in order of priority
     // TODO: Add a priority setting to the behaviour file for each case
+    // TODO: All of this stuff (except target) is probably going to the Log
     var target = 0;                 // matches with IDs, the ID of the character affected
     var IDs = [];                   // a list of other character IDs in the game
     // TODO: Consider adding otherStages, with a +/- option

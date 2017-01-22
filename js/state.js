@@ -29,7 +29,7 @@ var dialogueTokens = [];
 /**********************************************************************
  * (Object) A single state of an opponent.
  **/
-function State()
+function State ()
 {
     this.dialogue = "";
     this.image = "";
@@ -38,7 +38,7 @@ function State()
 /**********************************************************************
  * Constructs a state from an XML state.
  **/
-// TODO: Remove the fucking space between function and (), everywhere
+// TODO: ADD a space between functions and (), everywhere
 State.prototype.construct = function (state) 
 {
     this.dialogue = state.html();
@@ -55,7 +55,7 @@ State.prototype.construct = function (state)
 /**********************************************************************
  * (Object) A very simple token for replacing string elements.
  **/
-function DialogueToken(match, display)
+function DialogueToken (match, display)
 {
     this.match = match;
     this.display = display;
@@ -71,7 +71,7 @@ function DialogueToken(match, display)
 /**********************************************************************
  * Makes and adds a token.
  **/
-function makeDialogueToken(match, display) 
+function makeDialogueToken (match, display) 
 {
     addDialogueToken(new DialogueToken(match, display));
 }
@@ -79,7 +79,7 @@ function makeDialogueToken(match, display)
 /**********************************************************************
  * Adds a token.
  **/
-function addDialogueToken(token) 
+function addDialogueToken (token) 
 {
     dialogueTokens.push(token);
 }
@@ -87,7 +87,7 @@ function addDialogueToken(token)
 /**********************************************************************
  * Clears the current tokens.
  **/
-function clearDialogueTokens() 
+function clearDialogueTokens () 
 {
     dialogueTokens = [];
 }
@@ -96,7 +96,7 @@ function clearDialogueTokens()
  * Replaces in the provided dialogue based on the current replace 
  * tokens.
  **/
-function replaceDialogueTokens(dialogue) 
+function replaceDialogueTokens (dialogue) 
 {
     for (var i = 0; i < dialogueTokens.length; i++) {
         dialogue = dialogue.replace(new RegExp(TOKEN_SEPERATOR + dialogueTokens[i].match + TOKEN_SEPERATOR, "g"), dialogueTokens[i].display);
